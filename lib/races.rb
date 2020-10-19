@@ -4,4 +4,9 @@ this will be the class that takes the scraped information and initializes each c
 
 this will also handle the displaying of the race data in the CLI app.  CLI app can call on this class & method to display requested data.
 =end
+
+
 end
+
+
+
