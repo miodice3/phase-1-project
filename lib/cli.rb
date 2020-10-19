@@ -21,3 +21,13 @@ def run
 end
 
 =end
+
+class CLI
+
+    def initialize
+        puts "CLI.initialize"
+        puts "Calling Scraper.fisrt_scrape"
+        Scraper.new.first_scrape
+    end
+
+end

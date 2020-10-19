@@ -1,5 +1,5 @@
-class RaceType
-
+class Activity
+=begin
     @@all = []
 
     attr_accessor :name
@@ -21,5 +21,5 @@ class RaceType
             return self.new(name)
         end
     end
-
+=end
 end

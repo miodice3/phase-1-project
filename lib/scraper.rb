@@ -1,3 +1,24 @@
+class Scraper
+
+    attr_accessor :base_url
+
+    def initialize
+        @base_url = "https://www.traillink.com/top-trails/"
+    end
+    
+    def first_scrape
+       puts "Scraper.first_scrape method test"
+       html = open(@base_url)
+       puts "html opened link"
+       trails_parsed_to_html = Nokogiri::HTML(html)
+       binding.pry
+       #puts trails_parsed_to_html
+    end
+
+end
+
+
+
 =begin
 this is where we will initialize the class Scraper
 initialization funciton needs to be set equal to URL of the page you will be visiting to scrape your first set of informaiton.

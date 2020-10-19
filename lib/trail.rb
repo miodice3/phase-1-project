@@ -1,4 +1,4 @@
-class Races
+class Trail
 =begin
 this will be the class that takes the scraped information and initializes each class of "races", each race being a new instance of the class
 
