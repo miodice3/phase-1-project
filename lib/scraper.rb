@@ -4,12 +4,11 @@ class Scraper
 
     def initialize
         @base_url = "https://www.traillink.com/top-trails/"
+        @base_url_review = "https://www.traillink.com"
     end
     
     def first_scrape
-       puts "Scraper.first_scrape method test"
        html = open(@base_url)
-       puts "html opened link"
        trails_parsed_to_html = Nokogiri::HTML(html)
        short=trails_parsed_to_html.css('#trail')
 
@@ -21,9 +20,11 @@ class Scraper
             state = each_trail.css(".states").text
             length_mi = each_trail.css(".length").text.split[0]
             trail_desc_short = each_trail.css("div")[2].text
-            trail_class_create_array << {trail_name_key: trail_name, state_key: state, length_mi_key: length_mi, trail_desc_short_key: trail_desc_short}
+            trail_url = each_trail.css(".info").css("a").attr('href').text
+            trail_class_create_array << {trail_name_key: trail_name, state_key: state, length_mi_key: length_mi, trail_desc_short_key: trail_desc_short, trail_url_key: trail_url}
         end
        trail_class_create_array
+       binding.pry
     end
 
 end

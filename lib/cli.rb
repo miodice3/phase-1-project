@@ -32,7 +32,16 @@ class CLI
         
         trails_array.each do |trail|
             Trails.new(trail)
+        end    
+
+        Trails.all.each_with_index do |val, index|
+             puts "trail number: #{index+1} for #{val}"
+             #sleep 0.3
         end
+
+        user_input = gets.chomp
+        puts "please pick a trail number to see more informaiton"
+        #the scrap has been updated to retrieve the individual URL, nd append to base_url_review.
         binding.pry
     end
 
