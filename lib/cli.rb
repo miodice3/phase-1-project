@@ -27,7 +27,13 @@ class CLI
     def initialize
         puts "CLI.initialize"
         puts "Calling Scraper.fisrt_scrape"
-        Scraper.new.first_scrape
+
+        trails_array = Scraper.new.first_scrape
+        
+        trails_array.each do |trail|
+            Trails.new(trail)
+        end
+        binding.pry
     end
 
 end

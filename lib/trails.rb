@@ -1,4 +1,20 @@
-class Trail
+class Trails
+
+    @@all = []
+
+    def initialize(attributes)          
+        attributes.each do |key, value| 
+        self.class.attr_accessor(key)
+        self.send(("#{key}="), value)   
+        end
+        @@all << self
+    end
+
+    def self.all
+        @@all
+    end
+
+    
 =begin
 this will be the class that takes the scraped information and initializes each class of "races", each race being a new instance of the class
 
@@ -7,6 +23,5 @@ this will also handle the displaying of the race data in the CLI app.  CLI app c
 
 
 end
-
 
 

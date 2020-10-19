@@ -11,8 +11,19 @@ class Scraper
        html = open(@base_url)
        puts "html opened link"
        trails_parsed_to_html = Nokogiri::HTML(html)
-       binding.pry
-       #puts trails_parsed_to_html
+       short=trails_parsed_to_html.css('#trail')
+
+       trail_class_create_array = []
+       
+        short.each do |each_trail|
+            
+            trail_name = each_trail.css("h3").text
+            state = each_trail.css(".states").text
+            length_mi = each_trail.css(".length").text.split[0]
+            trail_desc_short = each_trail.css("div")[2].text
+            trail_class_create_array << {trail_name_key: trail_name, state_key: state, length_mi_key: length_mi, trail_desc_short_key: trail_desc_short}
+        end
+       trail_class_create_array
     end
 
 end
@@ -73,3 +84,19 @@ as an example though, this is what you'd do
     end
 
 =end
+
+
+
+       #short.css("#trail")[0].css(".activities")[0]  - bundle of activity types allowed.
+       #these will require their own counter loop dependent on counting the types of activities allowed at each trail location
+       #short.css("#trail")[0].css(".activities")[0].css("a").length    => 4 listed, without .length, this is what we'll need to iterate over to store activity types.
+       #short.css("#trail")[0].css(".activities")[0].css("a")[0] => first activity bundle (horseback riding trails)
+       #short.css("#trail")[0].css(".activities")[0].css("a")[1] => second activity bundle (mountain biking trails)
+       #short.css("#trail")[0].css(".activities")[0].css("a")[2] => third activity bundle (walking-trails)
+       #short.css("#trail")[0].css(".activities")[0].css("a")[2].attr('href').split('/')[2] => "walking-trails"
+       #short.css("#trail")[0].css(".activities")[0].css("a")[3] => fourth activity bundle (cross-country-skiing-trails)
+       #short.css("#trail")[0].css(".activities")[0].css("a")[3].attr('href').split('/')[2] => "cross-country-skiing-trails"
+       #to strip formatting out for each actual item:
+       #short.css("#trail")[0].css(".activities")[0].css("a").attr('href').text.split('/')[2]   < gives "horseback-riding-trails"
+       #binding.pry
+       #puts trails_parsed_to_html
