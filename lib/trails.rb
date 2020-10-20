@@ -38,6 +38,17 @@ class Trails
         end
     end
 
+    def self.print_trails_by_state(string)
+        string.each_with_index do |trail, index|
+            #binding.pry
+            trail.print_trail
+            index = index += 1
+            puts "Trail #{index} of #{string.length}."
+            #sleep 0.1
+            puts ""
+        end
+    end
+
 
 end
 

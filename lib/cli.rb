@@ -13,12 +13,8 @@ class CLI
             Trails.new(trail)
         end
 
-        #State.all does return all instances of state class, complete with @name
-        #Trails.all does return all instances of trails, complete with instance of state class
-
         puts "type 1 to see all #{Trails.all.length} of the best trails! This will take approx #{0.1*Trails.all.length} seconds to return all results."
         puts "type 2 to select trails by state"
-        #binding.pry
         user_input = gets.chomp.to_i
         
         if user_input == 1
@@ -33,11 +29,20 @@ class CLI
             State.print_all_states
             state_selection = gets.chomp
             state_selection_formatted = state_selection.to_i - 1
-            trails_by_state = Trails.all.select do |trail|
-                trail.state_key = State.all[state_selection_formatted]
-            end
-            binding.pry
-            #write code to list states to pick trails from
+                trails_by_state = Trails.all.select do |trail|
+                trail.state_key == State.all[state_selection_formatted]
+                end
+
+            puts Trails.print_trails_by_state(trails_by_state)
+            puts "enter the trail number you'd like to see details on"
+            final_trail_selection = gets.chomp
+
+            final_trail_selection_formatted = final_trail_selection.to_i - 1
+            
+            final_trail_instance = trails_by_state[final_trail_selection_formatted]
+            #binding.pry
+            in_depth = Scraper.new.second_scrape(final_trail_instance.trail_url_key)
+            puts in_depth
         end
 
 #        trail_review_parking_info = Scraper.new.second_scrape("/trail/air-line-state-park-trail/")
