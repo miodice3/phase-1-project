@@ -21,13 +21,22 @@ class CLI
         #binding.pry
         user_input = gets.chomp.to_i
         
-#        ct_trails = State.all[0].trails_by_state
-#        puts ct_trails
-#        binding.pry
         if user_input == 1
             Trails.print_all_trails
+            puts "enter the trail number you'd like to see details on"
+            trail_selection = gets.chomp
+            trail_selection_formatted = trail_selection.to_i - 1
+            in_depth = Scraper.new.second_scrape(Trails.all[trail_selection_formatted].trail_url_key)
+            puts in_depth
+            
         elsif user_input == 2
             State.print_all_states
+            state_selection = gets.chomp
+            state_selection_formatted = state_selection.to_i - 1
+            trails_by_state = Trails.all.select do |trail|
+                trail.state_key = State.all[state_selection_formatted]
+            end
+            binding.pry
             #write code to list states to pick trails from
         end
 

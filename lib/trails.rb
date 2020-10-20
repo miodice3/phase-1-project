@@ -33,7 +33,7 @@ class Trails
             trail.print_trail
             index = index += 1
             puts "Trail #{index} of #{Trails.all.length}."
-            sleep 0.1
+            #sleep 0.1
             puts ""
         end
     end

@@ -31,15 +31,14 @@ class State
 
     def print_state
         puts "******************************************************"
-        puts "State Name: #{name}."
-        puts ""
+        puts "State Name: #{name}"
     end
 
     def self.print_all_states
         @@all.each_with_index do |state, index|
             #binding.pry
             state.print_state
-            #puts ""
+            puts "State Index #: #{index+1}"
         end
     end
     # def print_trail
