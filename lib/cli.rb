@@ -1,6 +1,6 @@
 class CLI
 
-#    def initialize
+    def initialize
         puts "CLI.initialize"
         puts "Calling Scraper.fisrt_scrape"
 
@@ -13,22 +13,30 @@ class CLI
             Trails.new(trail)
         end
 
-        
         #State.all does return all instances of state class, complete with @name
         #Trails.all does return all instances of trails, complete with instance of state class
-        ct_trails = State.all[0].trails_by_state
-        puts ct_trails
 
-        trail_review_parking_info = Scraper.new.second_scrape("/trail/air-line-state-park-trail/")
-        binding.pry
+        puts "type 1 to see all #{Trails.all.length} of the best trails! This will take approx #{0.1*Trails.all.length} seconds to return all results."
+        puts "type 2 to select trails by state"
+        #binding.pry
+        user_input = gets.chomp.to_i
+        
+#        ct_trails = State.all[0].trails_by_state
+#        puts ct_trails
+#        binding.pry
+        if user_input == 1
+            Trails.print_all_trails
+        elsif user_input == 2
+            State.print_all_states
+            #write code to list states to pick trails from
+        end
 
-    #end
+#        trail_review_parking_info = Scraper.new.second_scrape("/trail/air-line-state-park-trail/")
+
+
+    end
 end
 =begin
-        puts "type 1 to see all #{Trails.all.length} of the best trails!"
-        #ultimately will need to lead to the option of full review or parking directions
-        puts "type 2 to select trails by state"
-        #ultimately will need to lead to the option of full review or parking directions
 
         user_input = gets.chomp.to_i
         org_array = []
