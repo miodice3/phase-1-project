@@ -12,11 +12,8 @@ class Scraper
     def first_scrape
        html = open(@base_url)
        trails_parsed_to_html = Nokogiri::HTML(html)
-       short=trails_parsed_to_html.css('#trail')
-#make request to HTML webpage.
-       #html elements selector query, TR within TB, for ID trails.
-
-       #scraper would return states & trails
+       short=trails_parsed_to_html.css('#trail')        #make request to HTML webpage.
+                                #html elements selector query, TR within TB, for ID trails.
 
        trail_class_create_array = []
        
@@ -26,11 +23,12 @@ class Scraper
             length_mi = each_trail.css(".length").text.split[0]
             trail_desc_short = each_trail.css("div")[2].text
             trail_url = each_trail.css(".info").css("a").attr('href').text
-            trail_class_create_array << {trail_name_key: trail_name, state_key: state, length_mi_key: length_mi, trail_desc_short_key: trail_desc_short, trail_url_key: trail_url}
+
+            state_instance = State.find_or_create_by_name(state)
+            
+            trail_class_create_array = {trail_name_key: trail_name, state_key: state_instance, length_mi_key: length_mi, trail_desc_short_key: trail_desc_short, trail_url_key: trail_url}
+            Trails.new(trail_class_create_array)
         end
-       trail_class_create_array
-       #returning a list of hashes
-        #ok to create here, also less code. OK to instantiate this simplifies, not objecting to asking trails or other classes for information it isnt concerned with.
     end
 
     def second_scrape(string)
@@ -43,38 +41,3 @@ class Scraper
     end
 
 end
-
-
-=begin
-    #you'll also need your second_scrape logic here
-    def second_scrape(review_url)   <- small snippit only that gets tacked onto the initial URL
-        review_html = open(@base_url + review_url)
-        review_html_parsed_to_elements = Nokogiri::HTML(review_html)
-
-        parse through, create a couple new variables worth of information here.
-        
-        venue_details = review_html_parsed_to_elements.css("some tags").text
-        venue_altitude = review_html_parsed_to_elements.css("some other tags").text
-        
-        return data in a hash, as so 
-        return {bike_race_venue_details: venue_details, venue_alt: venue_altitude}
-
-    end
-
-=end
-
-
-
-       #short.css("#trail")[0].css(".activities")[0]  - bundle of activity types allowed.
-       #these will require their own counter loop dependent on counting the types of activities allowed at each trail location
-       #short.css("#trail")[0].css(".activities")[0].css("a").length    => 4 listed, without .length, this is what we'll need to iterate over to store activity types.
-       #short.css("#trail")[0].css(".activities")[0].css("a")[0] => first activity bundle (horseback riding trails)
-       #short.css("#trail")[0].css(".activities")[0].css("a")[1] => second activity bundle (mountain biking trails)
-       #short.css("#trail")[0].css(".activities")[0].css("a")[2] => third activity bundle (walking-trails)
-       #short.css("#trail")[0].css(".activities")[0].css("a")[2].attr('href').split('/')[2] => "walking-trails"
-       #short.css("#trail")[0].css(".activities")[0].css("a")[3] => fourth activity bundle (cross-country-skiing-trails)
-       #short.css("#trail")[0].css(".activities")[0].css("a")[3].attr('href').split('/')[2] => "cross-country-skiing-trails"
-       #to strip formatting out for each actual item:
-       #short.css("#trail")[0].css(".activities")[0].css("a").attr('href').text.split('/')[2]   < gives "horseback-riding-trails"
-       #binding.pry
-       #puts trails_parsed_to_html

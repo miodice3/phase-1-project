@@ -3,19 +3,9 @@ class CLI
     def initialize
         puts "CLI.initialize"
         puts "Calling Scraper.fisrt_scrape"
+        
+        Scraper.new.first_scrape
 
-        trails_array = Scraper.new.first_scrape
-#transformation to remove to scraper class ln 9-14 - should not be manipulating any data in cli class        
-        trails_array.each do |trail|
-            state_key = trail[:state_key]
-            state_instance = State.find_or_create_by_name(state_key)
-            #state class doing instance management for me. not always good. 
-            #state & trails class should not know they're being used by CLI, cant format data in CLI the same way.  CLI limit only to input output
-            trail[:state_key] = state_instance
-            Trails.new(trail)
-        end
-        binding.pry
-#16-17 ok
         puts "type 1 to see all #{Trails.all.length} of the best trails! This will take approx #{0.1*Trails.all.length} seconds to return all results."
         puts "type 2 to select trails by state"
         user_input = gets.chomp.to_i
