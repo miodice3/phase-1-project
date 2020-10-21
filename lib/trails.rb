@@ -2,6 +2,8 @@ class Trails
 
     @@all = []
 
+    attr_accessor :second_scrape
+
     def initialize(attributes)          
         attributes.each do |key, value| 
         self.class.attr_accessor(key)

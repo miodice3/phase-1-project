@@ -28,9 +28,9 @@ class CLI
             State.print_all_states                                           #calling non instance method (or static, review) method on the state class
             puts "Please enter the state number you'd like to see trails for"
             state_selection = gets.chomp.to_i - 1
-                trails_by_state = Trails.all.select do |trail|
+            trails_by_state = Trails.all.select do |trail|
                 trail.state_key == State.all[state_selection]                   #looping through all of my trails, filtering out all trails that do not have the selected state object. equality test
-                end
+            end
             Trails.print_all_trails(trails_by_state)
             puts "Please enter the trail number you'd like to see details on"
 
