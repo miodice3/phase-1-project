@@ -5,12 +5,18 @@ class Scraper
     def initialize
         @base_url = "https://www.traillink.com/top-trails/"
         @base_url_review = "https://www.traillink.com"
+        #base_url just traillink.com/ >> add top trails where you need it.
+        #url to query, 2nd function to parse information.
     end
     
     def first_scrape
        html = open(@base_url)
        trails_parsed_to_html = Nokogiri::HTML(html)
        short=trails_parsed_to_html.css('#trail')
+#make request to HTML webpage.
+       #html elements selector query, TR within TB, for ID trails.
+
+       #scraper would return states & trails
 
        trail_class_create_array = []
        
@@ -23,6 +29,8 @@ class Scraper
             trail_class_create_array << {trail_name_key: trail_name, state_key: state, length_mi_key: length_mi, trail_desc_short_key: trail_desc_short, trail_url_key: trail_url}
         end
        trail_class_create_array
+       #returning a list of hashes
+        #ok to create here, also less code. OK to instantiate this simplifies, not objecting to asking trails or other classes for information it isnt concerned with.
     end
 
     def second_scrape(string)
