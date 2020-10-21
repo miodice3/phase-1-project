@@ -28,11 +28,11 @@ class Scraper
         end
     end
 
-    def second_scrape(string)
-        comb_str = @base_url_review + string
+    def second_scrape(string)  #Format output nd improvement
+        comb_str = @base_url + string
         html = open(comb_str)
         trail_parsed_to_html = Nokogiri::HTML(html)
-        trail_parsed_to_html.css('p').text #returns summary & parking paragraphs
+        puts trail_parsed_to_html.css('p').text #returns summary & parking paragraphs
     end
 
 end
