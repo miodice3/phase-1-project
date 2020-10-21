@@ -21,7 +21,7 @@ class Scraper
 
             state_instance = State.find_or_create_by_name(state)    #pass in state string, return instance of state
             
-            trail_class_create_hash = {trail_name_key: trail_name, state_key: state_instance, length_mi_key: length_mi, trail_desc_short_key: trail_desc_short, trail_url_key: trail_url}
+            trail_class_create_hash = {trail_name_key: trail_name, state_instance: state_instance, length_mi_key: length_mi, trail_desc_short_key: trail_desc_short, trail_url_key: trail_url}
             Trails.new(trail_class_create_hash)
         end
     end

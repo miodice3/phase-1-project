@@ -25,7 +25,7 @@ class Trails
         string.each_with_index do |trail, index|
             puts "******************************************************"
             puts "Name: #{trail.trail_name_key}"
-            puts "This trail is #{trail.length_mi_key} miles long and located in #{trail.state_key.name}."
+            puts "This trail is #{trail.length_mi_key} miles long and located in #{trail.state_instance.name}."
             puts "Description preview: #{trail.trail_desc_short_key}"
             puts "Trail # #{index + 1} of #{string.length}."
             sleep 0.1

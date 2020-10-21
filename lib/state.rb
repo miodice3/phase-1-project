@@ -15,7 +15,7 @@ class State
     end
 
     def trails_by_state
-        Trails.all.select {|trail| trail.state_key == self}
+        Trails.all.select {|trail| trail.state_instance == self}
     end
 
     def self.find_or_create_by_name(name)

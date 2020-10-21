@@ -1,5 +1,9 @@
 class CLI
-#new class for input validation (gets chomp stuff should be a method, also checking if they put in valid entry)
+    #update priority:
+    #reconfigure scraper class to recieve instance of Trail class, update instance variable with return second scrape information so its actually a property of the Trail class
+    #watch CLI output tricks, give viewer additional text to read upon request, etc.
+    
+    #new class for input validation (gets chomp stuff should be a method, also checking if they put in valid entry)
 
     def initialize
         puts "*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"
@@ -10,8 +14,14 @@ class CLI
         
         Scraper.new.first_scrape
 
+    end
+
+    def self.run
+        puts ""
+        puts ""
         puts "type 1 to see all #{Trails.all.length} of the best trails! This will take approx #{0.1*Trails.all.length} seconds to return all results."
         puts "type 2 to select trails by state.  This will take approx #{0.1*State.all.length} seconds to return all results."
+        puts "to exit, please hit CTRL + C"
 
         user_input = gets.chomp.to_i
         
@@ -23,13 +33,14 @@ class CLI
 
             selected_trail_url = Trails.all[trail_selection].trail_url_key
             Scraper.new.second_scrape(selected_trail_url)
+            self.run
             
         elsif user_input == 2
             State.print_all_states                                           #calling non instance method (or static, review) method on the state class
             puts "Please enter the state number you'd like to see trails for"
             state_selection = gets.chomp.to_i - 1
             trails_by_state = Trails.all.select do |trail|
-                trail.state_key == State.all[state_selection]                   #looping through all of my trails, filtering out all trails that do not have the selected state object. equality test
+                trail.state_instance == State.all[state_selection]                   #looping through all of my trails, filtering out all trails that do not have the selected state object. equality test
             end
             Trails.print_all_trails(trails_by_state)
             puts "Please enter the trail number you'd like to see details on"
@@ -39,6 +50,7 @@ class CLI
             final_trail_instance = trails_by_state[trail_selection]
 
             Scraper.new.second_scrape(final_trail_instance.trail_url_key)
+            self.run
         end
 
     end
