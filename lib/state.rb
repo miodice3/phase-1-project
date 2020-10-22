@@ -14,7 +14,7 @@ class State
         @@all
     end
 
-    def trails_by_state
+    def trails_by_state #how did this get here
         Trails.all.select {|trail| trail.state_instance == self}
     end
 
