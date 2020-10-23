@@ -35,7 +35,6 @@ class Scraper
         html = open(comb_str)
         trail_parsed_to_html = Nokogiri::HTML(html)
         trail_parsed_to_html.css('p').text #returns summary & parking paragraphs
-
     end
 
 end

@@ -70,11 +70,15 @@ class CLI
                 
                 final_trail_instance = trails_by_state[trail_selection]
                 #binding.pry
-                result = Scraper.new.second_scrape(final_trail_instance.trail_url_key)
-                Trails.all[final_trail_instance.unique_id_key].second_scrape_key = result
-#                binding.pry
+
+                if final_trail_instance.second_scrape_key == ""
+                    binding.pry
+                    result = Scraper.new.second_scrape(final_trail_instance.trail_url_key)
+                    Trails.all[final_trail_instance.unique_id_key].second_scrape_key = result
+                end
+            
+                binding.pry
                 puts Trails.all[final_trail_instance.unique_id_key].second_scrape_key
-                #binding.pry
                 self.run
             end
  
