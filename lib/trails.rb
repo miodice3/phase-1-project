@@ -24,15 +24,29 @@ class Trails
 
         selected_instance = selected_instance[0]
 
-        if selected_instance.second_scrape_key == ""
-            second_scrape_return = Scraper.new.second_scrape(selected_instance.trail_url_key)
-            
-            #split massive paragraph into array by sentences, print X at a time            
+                if selected_instance.second_scrape_key == ""
+                    second_scrape_return = Scraper.new.second_scrape(selected_instance.trail_url_key)
 
-            selected_instance.second_scrape_key = second_scrape_return
+                    selected_instance.second_scrape_key = second_scrape_return.split(". ")
+                   
+                    selected_instance.second_scrape_key.each do |sentence|
+                        sentence << "."
+                    end
+                end
+
+        i = 0
+        user_input = 1
+        while i <= selected_instance.second_scrape_key.length && user_input == 1
+            n = 0
+            while n <= 5
+                puts selected_instance.second_scrape_key[i]
+                i += 1
+                n += 1
+            end
+            puts ""
+            puts "Please enter 1 to keep reading, or enter any other key to return to the main menu"
+            user_input = gets.chomp.to_i
         end
- 
-        puts selected_instance.second_scrape_key
     end
 
     def self.trails
