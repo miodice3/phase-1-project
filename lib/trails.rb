@@ -16,6 +16,25 @@ class Trails
         @@all
     end
 
+    def self.unique_id_to_update_second_scrape(selection) #accepts unique id, calls for scrape
+
+        selected_instance = Trails.all.select do |trail|
+            trail.unique_id_key == selection
+            end
+
+        selected_instance = selected_instance[0]
+
+        if selected_instance.second_scrape_key == ""
+            second_scrape_return = Scraper.new.second_scrape(selected_instance.trail_url_key)
+            
+            #split massive paragraph into array by sentences, print X at a time            
+
+            selected_instance.second_scrape_key = second_scrape_return
+        end
+ 
+        puts selected_instance.second_scrape_key
+    end
+
     def self.trails
         @trail_name_key
         binding.pry
@@ -33,13 +52,5 @@ class Trails
             puts ""
         end
     end
-
-#     def self.find_from_state_array(val_array)
-#         val_array.select |trail|
-# #        Trails.all.select do |trail|
-        
-#             trail.unique_id_key == 
-#         end
-#     end
 
 end
