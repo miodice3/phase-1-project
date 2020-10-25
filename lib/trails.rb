@@ -43,6 +43,8 @@ class Trails
             end
             puts ""
             puts "Please enter 1 to keep reading, or enter any other key to return to the main menu"
+            puts ""
+            puts ""
             user_input = gets.chomp.to_i
         end
     end
