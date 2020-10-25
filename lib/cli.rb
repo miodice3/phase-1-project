@@ -1,10 +1,4 @@
 class CLI
-    #update priority:
-    
-    #watch CLI output tricks, give viewer additional text to read upon request, etc.
-    #clickable link for final trail selection through terminal is possible
-    #open & "exit" graphics - ASCII generators, color changing, music apparently works too.  gem, colorize. 
-    #rotating / while loading
     
     def initialize
         puts "*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"
@@ -12,9 +6,7 @@ class CLI
         puts ""
         puts "We are querying the internet for the most up to date information."
         puts "*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"
-        
         Scraper.new.first_scrape
-
     end
 
     def self.run
